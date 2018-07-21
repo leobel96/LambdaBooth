@@ -1,7 +1,7 @@
 # LambdaBooth
 A simple guide to make a photobooth with python and a Raspberry Pi. This photobooth works in this way: a person push a button, a 5 seconds timer starts, after the 5 seconds a photo is taken using a DSLR camera connected to the Raspberry, the background of the photo is changed with a random background taken from a list provided by the user using chromakey technique, the original and modified photos are saved in two folders chosen by the user.
 
-## Requirements
+## Bill Of Materials
 To make the Lambdabooth you need:
 - A DSLR camera, please refer to [this list]() to make sure your camera is supported
 - A Raspberry Pi
