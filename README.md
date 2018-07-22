@@ -1,5 +1,15 @@
-# LambdaBooth
+
+<p align="center">
+  <img
+    alt="Logo"
+    src="https://github.com/leobel96/LambdaBooth/blob/master/images/logo.svg"
+    width="500"
+  />
+</p>
+
+
 LambdaBooth is an hardware and software photobooth that can make your parties even more funny.
+
 
 ## How it works
 This photobooth works in this way: 
