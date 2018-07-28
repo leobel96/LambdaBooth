@@ -22,7 +22,7 @@ This photobooth works in this way:
 ## Bill Of Materials
 To make the Lambdabooth you need:
 - A DSLR camera, please refer to [this list](http://www.gphoto.org/proj/libgphoto2/support.php) to make sure your camera is supported. I've tested it with a Canon EOS 1100D
-- A Raspberry Pi
+- A Raspberry Pi (more powerful it is and faster will be the elaboration)
 - A cable to connect your camera to USB (please refer to your camera's manual)
 - A micro USB Power Supply for Raspberry Pi
 - A big momentary push button to take the photo such as [this one](https://it.aliexpress.com/store/product/16mm-BIG-head-Plastic-Emergency-Stop-switch-1NO1NC-LA16-11ZS-A/2030101_32755091219.html?spm=a2g0y.12010108.1000016.1.34c85ab5uKJrBb&isOrigTitle=true)
@@ -33,9 +33,10 @@ To make the Lambdabooth you need:
 - Electric cables for connections
 
 ## Dependencies
-1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed
-2. Gphoto2: It is necessary to control a DSLR camera using the Raspberry Pi. Installing it is as simple as: `sudo apt-get install gphoto2 libgphoto2*`
+1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed.
+2. Gphoto2: It is necessary to control a DSLR camera using the Raspberry Pi. Installing it is as simple as: `sudo apt-get install gphoto2 libgphoto2*`.
 3. Opencv3: It is necessary for chromakeying. The installation is pretty long (it could require 4 hours on a first gen Raspberry Pi). To install it I have followed [this guide](https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/) from step 1 to step 11. There is also a [bash script](https://github.com/pageauc/opencv3-setup) that can simplify all the process and automate it but I've not tested it.
+4. Python-gphoto2: You need it to control your DSLR camera from Python. Install it with: `sudo pip install gphoto2`.
 
 ## Installation
 1. Clone all the repository in your Raspberry Pi
@@ -59,7 +60,7 @@ Probably, editing parameters in chromakey function, you can achieve better resul
 ## Troubleshooting
 - After dependencies installation, I noticed errors when trying to import opencv module in Python. This is caused by other dependencies missing. In my case they were libatlas, libqt4 and libqt4-test. I've installed them in this way: `sudo apt-get install libatlas-base-dev libqt4 libqt4-test`. If you notice other errors caused by dependencies missing, please use Google to find a way to install them.
 - Running gphoto2, I kept having error 'Could not claim the USB device'. This was caused by two processes which keep camera busy. To fix it I've followed [this guide](https://askubuntu.com/questions/993876/gphoto2-could-not-claim-the-usb-device). The problem was that, after reboot, the services keep autorun and I had to kill them after every boot. To kill them forever I used `sudo chmod -x /usr/lib/gvfs/gvfs-gphoto2-volume-monitor` and `sudo chmod -x /usr/lib/gvfs/gvfsd-gphoto2`.
-- For every problem related to opencv, gphoto2 or the other libraries used, please refer to their support page. In particular: [gphoto2](https://github.com/gphoto/gphoto2) and [opencv](https://github.com/skvark/opencv-python).
+- For every problem related to opencv, gphoto2 or the other libraries used, please refer to their support page. In particular: [gphoto2](https://github.com/gphoto/gphoto2), [opencv](https://github.com/skvark/opencv-python) and [python-gphoto2](https://github.com/jim-easterbrook/python-gphoto2).
 
 ## TODO
 - Video Demonstration
