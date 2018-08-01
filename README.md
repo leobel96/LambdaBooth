@@ -12,12 +12,37 @@ LambdaBooth is an hardware and software photobooth that can make your parties ev
 
 
 ## How it works
-This photobooth works in this way: 
-1. A person push a button 
-2. 5 seconds timer starts
-3. After the 5 seconds a photo is taken using a supported DSLR camera connected to the Raspberry
-4. The background of the photo is changed with a random background taken from a list provided by the user using chromakey technique
-5. The original and modified photos are saved in two folders chosen by the user.
+These are the LambdaBooth functions: 
+1. A person pushes a button (BUTTON).
+2. 5 seconds timer starts (COUNTDOWN).
+3. After the 5 seconds a photo is taken using a supported DSLR camera connected to the Raspberry and saved in a folder chosen by the user (CAMERA).
+4. The background of the photo is changed with a random background taken from a folder provided by the user using chromakey technique (CHROMAKEY).
+5. An overlay image (frame, watermark, logo, ...), with the same dimensions of the photo, is put on the photo (OVERLAY).
+6. The final photo is uploaded to a Google Photos album chosen by the user (UPLOAD).
+
+The user can switch on/off every function of the six provided without any issue from the "enable/disable features" menu in the file "LambdaBooth.py":
+```
+## ENABLE/DISABLE FEATURES
+BUTTON = 1      #use/don't use button
+COUNTDOWN = 0       #use/don't use countdown
+CAMERA = 1      #use/don't use camera
+CHROMAKEY = 0      #use/don't use chromakey
+OVERLAY = 1   #use/don't use overlay
+UPLOAD = 1   #use/don't use google photos upload
+```
+and he can also configure every aspect from "user configuration" menu:
+```
+## USER CONFIGURATION
+button_GPIO = 18    #pin to which button is connected (GPIO_pin and GND)
+segments_GPIO = (5,6,13,19,26,16,20) #pins connected in order to a,b,c,d,e,f segments
+camera_path = "in/"    #destination folder for photo taken
+default_photo = "in/front3.png"     #photo used with no camera
+background_path = "background/"    #source folder for backgrounds
+out_path = "out/"   #destination folder for photo processed
+overlay_image = "Risorsa1.png"   #image used for overlay (logo, frame, ...)
+album_name = "nome"   #name used for google photos album creation
+credentials_file = "credentials.json"   #file with google photos credentials
+```
 
 ## Bill Of Materials
 To make the Lambdabooth you need:
@@ -37,16 +62,18 @@ To make the Lambdabooth you need:
 2. Gphoto2: It is necessary to control a DSLR camera using the Raspberry Pi. Installing it is as simple as: `sudo apt-get install gphoto2 libgphoto2*`.
 3. Opencv3: It is necessary for chromakeying. The installation is pretty long (it could require 4 hours on a first gen Raspberry Pi). To install it I have followed [this guide](https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/) from step 1 to step 11. There is also a [bash script](https://github.com/pageauc/opencv3-setup) that can simplify all the process and automate it but I've not tested it.
 4. Python-gphoto2: You need it to control your DSLR camera from Python. Install it with: `sudo pip install gphoto2`.
+5. oauth2client, httplib2, requests: Used to upload photos on google photos. Install them with: `sudo pip3 install --upgrade oauth2client httplib2 requests`.
 
 ## Installation
 1. Clone all the repository in your Raspberry Pi
 2. Edit parameters in "LambdaBooth.py" according to your needs
 3. Create a folder for original photos, a folder for backgrounds and a folder for edited photos paying attention to edit their paths in LambdaBooth.py
-4. Make/seek backgrounds with the same dimensions of the original photo. The code tells you what is the right width and height
+4. Make/seek backgrounds and overlays with the same dimensions of the original photo. The code tells you what is the right width and height
 5. Add the possibility to shutdown the Raspberry Pi with the button following [this guide](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README#L619)
 6. Make "LambdaBooth.py" autostart at boot adding it to crontab following [this guide](https://www.raspberrypi.org/forums/viewtopic.php?t=139774#p927101)
 7. Connect the buttons according to your configuration and camera
 8. Wire the display as shown [here]()
+9. If you want to upload your photos to Google photos, the first time you have to follow [this guide](https://makezine.com/projects/raspberry-pi-photo-booth/) from paragraph 4 to first part of paragraph 7
 
 ## Result example
 I've taken a pretty hard green screen photo from google images to test the Chromakey feature. The result is pretty good:
