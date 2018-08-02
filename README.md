@@ -19,6 +19,7 @@ These are the LambdaBooth functions:
 4. The background of the photo is changed with a random background taken from a folder provided by the user using chromakey technique (CHROMAKEY).
 5. An overlay image (frame, watermark, logo, ...), with the same dimensions of the photo, is put on the photo (OVERLAY).
 6. The final photo is uploaded to a Google Photos album chosen by the user (UPLOAD).
+7. The final photo is also printed (PRINTING).
 
 The user can switch on/off every function of the six provided without any issue from the "enable/disable features" menu in the file "LambdaBooth.py":
 ```
@@ -58,22 +59,24 @@ To make the Lambdabooth you need:
 - Electric cables for connections
 
 ## Dependencies
+Every component needs its own dependecies to be satisfied. Here there is a list for every component:
 1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed.
-2. Gphoto2: It is necessary to control a DSLR camera using the Raspberry Pi. Installing it is as simple as: `sudo apt-get install gphoto2 libgphoto2*`.
-3. Opencv3: It is necessary for chromakeying. The installation is pretty long (it could require 4 hours on a first gen Raspberry Pi). To install it I have followed [this guide](https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/) from step 1 to step 11. There is also a [bash script](https://github.com/pageauc/opencv3-setup) that can simplify all the process and automate it but I've not tested it.
-4. Python-gphoto2: You need it to control your DSLR camera from Python. Install it with: `sudo pip install gphoto2`.
-5. oauth2client, httplib2, requests: Used to upload photos on google photos. Install them with: `sudo pip3 install --upgrade oauth2client httplib2 requests`.
+2. gphoto2 and python-gphoto2: They are necessary for CAMERA. Installing them is as simple as: `sudo apt-get install gphoto2 libgphoto2* & sudo pip3 install gphoto2`.
+3. opencv3: It is necessary for CHROMAKEY and OVERLAY. The installation is pretty long (it could require 4 hours on a first gen Raspberry Pi). To install it I have followed [this guide](https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/) from step 1 to step 11. There is also a [bash script](https://github.com/pageauc/opencv3-setup) that can simplify all the process and automate it but I've not tested it.
+4. oauth2client, httplib2, requests: They are necessary for UPLOAD. Install them with: `sudo pip3 install --upgrade oauth2client httplib2 requests`.
+5. CUPS, pycups: They are necessary for PRINTING. Install the first one following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/) and the second one with `sudo apt-get install libcups2-dev & sudo pip3 install pycups`.
 
 ## Installation
-1. Clone all the repository in your Raspberry Pi
-2. Edit parameters in "LambdaBooth.py" according to your needs
-3. Create a folder for original photos, a folder for backgrounds and a folder for edited photos paying attention to edit their paths in LambdaBooth.py
-4. Make/seek backgrounds and overlays with the same dimensions of the original photo. The code tells you what is the right width and height
-5. Add the possibility to shutdown the Raspberry Pi with the button following [this guide](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README#L619)
-6. Make "LambdaBooth.py" autostart at boot adding it to crontab following [this guide](https://www.raspberrypi.org/forums/viewtopic.php?t=139774#p927101)
-7. Connect the buttons according to your configuration and camera
-8. Wire the display as shown [here]()
-9. If you want to upload your photos to Google photos, the first time you have to follow [this guide](https://makezine.com/projects/raspberry-pi-photo-booth/) from paragraph 4 to first part of paragraph 7
+1. Clone all the repository in your Raspberry Pi.
+2. Edit parameters in "LambdaBooth.py" according to your needs.
+3. Create a folder for original photos, a folder for backgrounds and a folder for edited photos paying attention to edit their paths in "LambdaBooth.py".
+4. Make/seek backgrounds and overlays with the same dimensions of the original photo. The code tells you what is the right width and height.
+5. Add the possibility to shutdown the Raspberry Pi with the button following [this guide](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README#L619).
+6. Make "LambdaBooth.py" autostart at boot adding it to crontab following [this guide](https://www.raspberrypi.org/forums/viewtopic.php?t=139774#p927101).
+7. Connect the buttons according to your configuration and camera.
+8. Wire the display as shown [here]().
+9. If you want to upload your photos to Google photos, the first time you have to follow [this guide](https://makezine.com/projects/raspberry-pi-photo-booth/) from paragraph 4 to first part of paragraph 7.
+10. If you want to print your photos, change the value of "printer_name" in "LambdaBooth.py" according to your printer's "Queue Name" in CUPS server.
 
 ## Result example
 I've taken a pretty hard green screen photo from google images to test the Chromakey feature. The result is pretty good:
