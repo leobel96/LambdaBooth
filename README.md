@@ -24,12 +24,13 @@ These are the LambdaBooth functions:
 The user can switch on/off every function of the six provided without any issue from the "enable/disable features" menu in the file "LambdaBooth.py":
 ```
 ## ENABLE/DISABLE FEATURES
-BUTTON = 1      #use/don't use button
-COUNTDOWN = 0       #use/don't use countdown
-CAMERA = 1      #use/don't use camera
-CHROMAKEY = 0      #use/don't use chromakey
-OVERLAY = 1   #use/don't use overlay
-UPLOAD = 1   #use/don't use google photos upload
+BUTTON = 1  #use/don't use button
+COUNTDOWN = 0 #use/don't use countdown
+CAMERA = 1  #use/don't use camera
+CHROMAKEY = 0 #use/don't use chromakey
+OVERLAY = 1 #use/don't use overlay
+UPLOAD = 1  #use/don't use google photos upload
+PRINTING = 0  #send/don't send the result to printer
 ```
 and he can also configure every aspect from "user configuration" menu:
 ```
@@ -43,6 +44,7 @@ out_path = "out/"   #destination folder for photo processed
 overlay_image = "Risorsa1.png"   #image used for overlay (logo, frame, ...)
 album_name = "nome"   #name used for google photos album creation
 credentials_file = "credentials.json"   #file with google photos credentials
+printer_name = "Canon_MG2900_series"  #printer "Queue Name" found in CUPS server
 ```
 
 ## Bill Of Materials
