@@ -8,7 +8,7 @@
 </p>
 
 
-LambdaBooth is an hardware and software photobooth that can make your parties even more funny.
+LambdaBooth is an hardware and software modular and customizable photobooth that can make your parties even more funny.
 
 
 ## How it works
@@ -59,12 +59,14 @@ To make the Lambdabooth you need:
 - A well lit green screen such as [this one](https://www.amazon.com/LimoStudio-AGG1338-Studio-Backdrop-Included/dp/B00KQ23GGW/ref=sr_1_8?s=photo&ie=UTF8&qid=1532250306&sr=1-8&keywords=green+screen&dpID=41yE%252BXGppLL&preST=_SY300_QL70_&dpSrc=srch)
 - Material for the LambdaBooth's box. You can use wood, plastic,...
 - Electric cables for connections
+Obviously you can decide to don't use many things (such as the display) and make your own photobooth.
+
 
 ## Dependencies
 Every component needs its own dependecies to be satisfied. Here there is a list for every component:
 1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed.
 2. gphoto2 and python-gphoto2: They are necessary for CAMERA. Installing them is as simple as: `sudo apt-get install gphoto2 libgphoto2* & sudo pip3 install gphoto2`.
-3. opencv3: It is necessary for CHROMAKEY and OVERLAY. The installation is pretty long (it could require 4 hours on a first gen Raspberry Pi). To install it I have followed [this guide](https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/) from step 1 to step 11. There is also a [bash script](https://github.com/pageauc/opencv3-setup) that can simplify all the process and automate it but I've not tested it.
+3. opencv3: It is necessary for CHROMAKEY and OVERLAY. I've compiled it myself, anyway this is a pretty hard and time consuming method (it requires many hours. I've found [another method](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/) that should be easier and quicker. 
 4. oauth2client, httplib2, requests: They are necessary for UPLOAD. Install them with: `sudo pip3 install --upgrade oauth2client httplib2 requests`.
 5. CUPS, pycups: They are necessary for PRINTING. Install the first one following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/) and the second one with `sudo apt-get install libcups2-dev & sudo pip3 install pycups`.
 
@@ -80,7 +82,7 @@ Every component needs its own dependecies to be satisfied. Here there is a list 
 9. If you want to upload your photos to Google photos, the first time you have to follow [this guide](https://makezine.com/projects/raspberry-pi-photo-booth/) from paragraph 4 to first part of paragraph 7.
 10. If you want to print your photos, change the value of "printer_name" in "LambdaBooth.py" according to your printer's "Queue Name" in CUPS server.
 
-## Result example
+## Chromakey result example
 I've taken a pretty hard green screen photo from google images to test the Chromakey feature. The result is pretty good:
 
 ![Original Image](/images/front.jpg)
@@ -95,6 +97,7 @@ Probably, editing parameters in chromakey function, you can achieve better resul
 - For every problem related to opencv, gphoto2 or the other libraries used, please refer to their support page. In particular: [gphoto2](https://github.com/gphoto/gphoto2), [opencv](https://github.com/skvark/opencv-python) and [python-gphoto2](https://github.com/jim-easterbrook/python-gphoto2).
 
 ## TODO
+- Add a way to edit configuration from a GUI
 - Video Demonstration
 - LambdaBooth.py file
 - Display wiring
