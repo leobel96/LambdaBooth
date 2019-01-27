@@ -18,34 +18,22 @@ These are the LambdaBooth functions:
 3. After the 5 seconds a photo is taken using a supported DSLR camera connected to the Raspberry and saved in a folder chosen by the user (CAMERA).
 4. The background of the photo is changed with a random background taken from a folder provided by the user using chromakey technique (CHROMAKEY).
 5. An overlay image (frame, watermark, logo, ...), with the same dimensions of the photo, is put on the photo (OVERLAY).
-6. The final photo is uploaded to a Google Photos album chosen by the user (UPLOAD).
+6. The final photo is uploaded to a Google Photos album chosen by the user (GOOGLE_UPLOAD) and/or on a Facebook page album (FACEBOOK_UPLOAD).
 7. The final photo is also printed (PRINTING).
 
-The user can switch on/off every function of the six provided without any issue from the "enable/disable features" menu in the file "LambdaBooth.py":
-```
+The user can switch on/off every function of the seven provided without any issue from the "enable/disable features" menu in the file "LambdaBooth.py":
+```python
 ## ENABLE/DISABLE FEATURES
 BUTTON = 1  #use/don't use button
 COUNTDOWN = 0 #use/don't use countdown
 CAMERA = 1  #use/don't use camera
 CHROMAKEY = 0 #use/don't use chromakey
 OVERLAY = 1 #use/don't use overlay
-UPLOAD = 1  #use/don't use google photos upload
+GOOGLE_UPLOAD = 1  #use/don't use google photos upload
+FACEBOOK_UPLOAD = 1 #use/don't use facebook upload
 PRINTING = 0  #send/don't send the result to printer
 ```
-and he can also configure every aspect from "user configuration" menu:
-```
-## USER CONFIGURATION
-button_GPIO = 18    #pin to which button is connected (GPIO_pin and GND)
-segments_GPIO = (5,6,13,19,26,16,20) #pins connected in order to a,b,c,d,e,f segments
-camera_path = "in/"    #destination folder for photo taken
-default_photo = "in/front3.png"     #photo used with no camera
-background_path = "background/"    #source folder for backgrounds
-out_path = "out/"   #destination folder for photo processed
-overlay_image = "Risorsa1.png"   #image used for overlay (logo, frame, ...)
-album_name = "nome"   #name used for google photos album creation
-credentials_file = "credentials.json"   #file with google photos credentials
-printer_name = "Canon_MG2900_series"  #printer "Queue Name" found in CUPS server
-```
+and he can also configure every aspect from "configuration.yaml" file:
 
 ## Bill Of Materials
 To make the Lambdabooth you need:
@@ -66,8 +54,8 @@ Obviously you can decide to don't use many things (such as the display) and make
 Every component needs its own dependecies to be satisfied. Here there is a list for every component:
 1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed.
 2. gphoto2 and python-gphoto2: They are necessary for CAMERA. Installing them is as simple as: `sudo apt-get install gphoto2 libgphoto2* & sudo pip3 install gphoto2`.
-3. opencv3: It is necessary for CHROMAKEY and OVERLAY. I've compiled it myself, anyway this is a pretty hard and time consuming method (it requires many hours. I've found [another method](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/) that should be easier and quicker. 
-4. oauth2client, httplib2, requests: They are necessary for UPLOAD. Install them with: `sudo pip3 install --upgrade oauth2client httplib2 requests`.
+3. opencv3: It is necessary for CHROMAKEY and OVERLAY. I've compiled it myself, anyway this is a pretty hard and time consuming method (it requires many hours). Anyway you can also install it with `sudo pip install opencv-contrib-python`.
+4. requests: It is necessary for UPLOAD. Install it with: `sudo pip3 install --upgrade requests`.
 5. CUPS, pycups: They are necessary for PRINTING. Install the first one following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/) and the second one with `sudo apt-get install libcups2-dev & sudo pip3 install pycups`.
 
 ## Installation
