@@ -68,8 +68,9 @@ Every component needs its own dependecies to be satisfied. Here there is a list 
 6. Make "LambdaBooth.py" autostart at boot adding it to crontab following [this guide](https://www.raspberrypi.org/forums/viewtopic.php?t=139774#p927101).
 7. Connect the buttons according to your configuration and camera.
 8. Wire the display as shown [here]().
-9. If you want to upload your photos to Google photos or a Facebook page, follow [Facebook API configuration](#facebook-api-configuration) and [Google API configuration](#google-api-configuration).
-10. If you want to print your photos, change the value of "printer_name" in "LambdaBooth.py" according to your printer's "Queue Name" in CUPS server.
+9. If you want to upload your photos to Google photos or a Facebook page, follow [Facebook API configuration](#facebook-api-configuration) and [Google API configuration](#google-api-configuration). For first time configuration you have to connect a monitor to raspberry to allow your Facebook and Google apps.
+10. If you want to print your photos, first install CUPS following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/), then change the value of "printer_name" in `configuration.yaml` according to your printer's "Queue Name" in CUPS server.
+11. After the installation and after you have tested that everything work as expected, I suggest you to disable the raspberry pi's GUI following [these simple steps](http://ask.xmodulo.com/disable-desktop-gui-raspberry-pi.html) to reduce the GPU stress. 
 
 ## Facebook API configuration
 1. Go to https://developers.facebook.com.
