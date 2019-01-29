@@ -36,7 +36,7 @@ PRINTING = 0  #send/don't send the result to printer
 and he can also configure every aspect from "configuration.yaml" file:
 
 ## Bill Of Materials
-To make the Lambdabooth you need:
+To make the complete version of Lambdabooth you need:
 - A DSLR camera, please refer to [this list](http://www.gphoto.org/proj/libgphoto2/support.php) to make sure your camera is supported. I've tested it with a Canon EOS 1100D
 - A Raspberry Pi (more powerful it is and faster will be the elaboration)
 - A cable to connect your camera to USB (please refer to your camera's manual)
@@ -53,10 +53,11 @@ Obviously you can decide to don't use many things (such as the display) and make
 ## Dependencies
 Every component needs its own dependecies to be satisfied. Here there is a list for every component:
 1. Python 3 and pip3: If you have a recent version of Raspbian installed on your Raspberry Pi, they should already be installed.
-2. gphoto2 and python-gphoto2: They are necessary for CAMERA. Installing them is as simple as: `sudo apt-get install gphoto2 libgphoto2* & sudo pip3 install gphoto2`.
-3. opencv3: It is necessary for CHROMAKEY and OVERLAY. I've compiled it myself, anyway this is a pretty hard and time consuming method (it requires many hours). Anyway you can also install it with `sudo pip install opencv-contrib-python`.
-4. requests: It is necessary for UPLOAD. Install it with: `sudo pip3 install --upgrade requests`.
-5. CUPS, pycups: They are necessary for PRINTING. Install the first one following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/) and the second one with `sudo apt-get install libcups2-dev & sudo pip3 install pycups`.
+2. PyYAML: It is necessary to read the configuration file. Install it with `sudo pip3 install pyyaml`
+3. gphoto2 and python-gphoto2: They are necessary for CAMERA. Installing them is as simple as: `sudo apt-get install gphoto2 libgphoto2* & sudo pip3 install gphoto2`.
+4. opencv3: It is necessary for CHROMAKEY and OVERLAY. I've compiled it myself, anyway this is a pretty hard and time consuming method (it requires many hours). Anyway you can also install it with `sudo pip install opencv-contrib-python`.
+5. requests, flask: They are necessary for UPLOAD. Install them with: `sudo pip3 install --upgrade requests & sudo pip3 install Flask`.
+6. CUPS, pycups: They are necessary for PRINTING. Install the first one following [this guide](https://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/) and the second one with `sudo apt-get install libcups2-dev & sudo pip3 install pycups`.
 
 ## Installation
 1. Clone all the repository in your Raspberry Pi.
@@ -67,8 +68,30 @@ Every component needs its own dependecies to be satisfied. Here there is a list 
 6. Make "LambdaBooth.py" autostart at boot adding it to crontab following [this guide](https://www.raspberrypi.org/forums/viewtopic.php?t=139774#p927101).
 7. Connect the buttons according to your configuration and camera.
 8. Wire the display as shown [here]().
-9. If you want to upload your photos to Google photos, the first time you have to follow [this guide](https://makezine.com/projects/raspberry-pi-photo-booth/) from paragraph 4 to first part of paragraph 7.
+9. If you want to upload your photos to Google photos or a Facebook page, follow [Facebook API configuration](#facebook-api-configuration) and [Google API configuration](#google-api-configuration).
 10. If you want to print your photos, change the value of "printer_name" in "LambdaBooth.py" according to your printer's "Queue Name" in CUPS server.
+
+## Facebook API configuration
+1. Go to https://developers.facebook.com.
+2. Click on Get Started.
+3. Complete all the passages.
+4. Now you should be on your facebook app page. Click on `Facebook Login` and add to `valid OAuth redirect URI`: `https://www.facebook.com/`
+5. Click on "Settings" in the left column and "Base".
+6. Copy-paste the `App ID` and `App secret` in the `configuration.yaml` file.
+7. Now you can use your app to upload the images on a page YOU own.
+
+## Google API configuration
+1. Go to https://console.cloud.google.com/apis/library?pli=1
+2. Click on `Select project` from the top and, then, `New project`.
+3. Select the newly created project from the top.
+4. Search for `Photos Library API`.
+5. Enable it.
+6. Go to `Credentials` menu from `APIs & Services` on the left.
+7. `Create credentials`, `Oauth Client ID`
+8. Click on `Configure consent screen`, `Add scope`, `Manually paste`, paste: `https://www.googleapis.com/auth/photoslibrary`, click on `ADD`, select a name for the app and, then `SAVE`.
+9. Repeat passages 6 and 7.
+10. Select `Application type` as `other` and `create`.
+11. Now Copy-paste `client ID` and `client secret` in the `configuration.yaml` file.
 
 ## Chromakey result example
 I've taken a pretty hard green screen photo from google images to test the Chromakey feature. The result is pretty good:
@@ -85,7 +108,6 @@ Probably, editing parameters in chromakey function, you can achieve better resul
 - For every problem related to opencv, gphoto2 or the other libraries used, please refer to their support page. In particular: [gphoto2](https://github.com/gphoto/gphoto2), [opencv](https://github.com/skvark/opencv-python) and [python-gphoto2](https://github.com/jim-easterbrook/python-gphoto2).
 
 ## TODO
-- Add a way to edit configuration from a GUI
 - Video Demonstration
 - LambdaBooth.py file
 - Display wiring
