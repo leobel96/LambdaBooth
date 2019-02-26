@@ -1,0 +1,36 @@
+## USER CONFIGURATION
+button:
+  #pin to which button is connected. BCM numeration.
+  button_GPIO: 18
+camera:
+  #destination folder for photo taken
+  camera_path: in/
+image_manipulation:
+  #source folder for backgrounds. THEY MUST HAVE THE SAME DIMENSION OF THE IMAGE
+  background_path: background/
+  #photo used with no camera
+  no_camera_photo: front.jpg
+  #destination folder for photo processed
+  out_path: out/  
+  #image used for overlay (logo, frame, ...).
+  overlay_image: logo.png   
+countdown:
+  #pins connected in order to "A,B,C,D,E,F,DP" segments of 7-segment display. BCM numeration.
+  segments_GPIO: "5,6,13,19,26,16,20"
+google_upload:
+  #the name your album will have on Gphotos
+  g_album_name: LambdaBooth
+  #your google photos credentials
+  g_client_id: XXXXXXXXXXXX.apps.googleusercontent.com
+  g_client_secret: XXXXXXXXXXXXXXXX
+facebook_upload:
+  #the name your album will have on Facebook
+  fb_album_name: LambdaBooth
+  #https://www.shoutmeloud.com/get-facebook-app-id-secret-key.html
+  fb_app_id: XXXXXXXXXXXX
+  fb_app_secret: XXXXXXXXXXXXXXXXX
+  #https://www.facebook.com/help/community/question/?id=378910098941520
+  fb_page_id: XXXXXXXXXXXXXXXX
+printing:
+  #printer "Queue Name" found in CUPS server
+  printer_name: Canon_MG2900_series
